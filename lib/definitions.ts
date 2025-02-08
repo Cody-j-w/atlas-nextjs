@@ -23,5 +23,5 @@ export type Question = {
 export type Answer = {
   id: string,
   answer: string,
-  question_id: String;
+  question_id: string;
 }
