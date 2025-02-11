@@ -20,14 +20,12 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
             </h1>
             <AskQuestion topic={topic.id} />
             {questions.map((question) => (
-                <Link href={`/ui/questions/${question.id}`}>
-                    <Question
-                        key={question.id}
-                        id={question.id}
-                        text={question.title}
-                        votes={question.votes}
-                    />
-                </Link>
+                <Question
+                    key={question.id}
+                    id={question.id}
+                    text={question.title}
+                    votes={question.votes}
+                />
             ))}
         </div>
     );
