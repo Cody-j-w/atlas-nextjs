@@ -2,7 +2,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { insertTopic, insertQuestion, incrementVotes, insertAnswer } from "./data";
+import { insertTopic, insertQuestion, incrementVotes, insertAnswer, updateQuestionAnswer } from "./data";
 import { redirect } from "next/navigation";
 
 export async function addTopic(data: FormData) {
@@ -44,6 +44,18 @@ export async function addAnswer(data: FormData) {
     } catch (error) {
         console.error("Database Error: ", error);
         throw new Error("Failed to add answer.");
+    }
+}
+
+export async function addCorrectAnswer(data: FormData) {
+    try {
+        updateQuestionAnswer(
+            data.get("question_id") as string,
+            data.get("id") as string);
+        revalidatePath("/ui/questions/[id]", "page");
+    } catch (error) {
+        console.error("Database Error: ", error);
+        throw new Error("Failed to add correct answer.");
     }
 }
 
