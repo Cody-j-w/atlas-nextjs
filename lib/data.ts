@@ -64,6 +64,17 @@ export async function fetchAnswers(id: string) {
   }
 }
 
+export async function fetchAnswer(id: string) {
+  try {
+    const data =
+      await sql<Answer>`SELECT * FROM answers WHERE id = ${id}`;
+    return data.rows;
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error("failed to fetch answer");
+  }
+}
+
 export async function insertQuestion(
   question: Pick<Question, "title" | "topic_id" | "votes">
 ) {
@@ -98,6 +109,17 @@ export async function insertAnswer(answer: Pick<Answer, "answer" | "question_id"
   } catch (error) {
     console.error("Database Error: ", error);
     throw new Error("Failed to add answer.");
+  }
+}
+
+export async function updateQuestionAnswer(id: string, answer_id: string) {
+  try {
+    const data =
+      await sql<Question>`UPDATE questions SET answer_id = ${answer_id} WHERE id = ${id};`;
+    return data.rows;
+  } catch (error) {
+    console.error("Database Error: ", error);
+    throw new Error("Failed to add correct answer.");
   }
 }
 
