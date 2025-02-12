@@ -13,8 +13,8 @@ export default async function LoggedInUser() {
     }
 
     return (
-        <div>
-            <img src={image} alt="User Avatar" />
+        <div className="flex h-[48px] w-full grow items-center justify-center gap-2">
+            <img className="w-10 rounded-full" src={image} alt="User Avatar" />
             <p>{session.user.name}</p>
         </div>
     )
